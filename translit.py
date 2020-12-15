@@ -76,19 +76,19 @@ mapping = {
 
 print(mapping)
 
-s = ''
+s = '   '
 def onPress(e):
     global s
     if len(e.name) == 1 and ('a' <= e.name <= 'z' or 'A' <= e.name <= 'Z' or e.name == "'" or e.name == "#"):
-        if len(s) > 3: s = ''
         s += e.name
+        s = s[-2:]
         if e.name in mapping:
             keyboard.send('backspace')
             keyboard.write(mapping[e.name])
-        if len(s) > 1 and s[-2:] in mapping:
+        if s in mapping:
             for _ in range(2):
                 keyboard.send('backspace')
-            keyboard.write(mapping[s[-2:]])
+            keyboard.write(mapping[s])
 
 keyboard.on_press(onPress, suppress=False)
 
